@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚗 A toda velocidad</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body {
+            min-height: 100vh;
+            background: url('../public/universo.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            padding: 30px 20px;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 20, 0.5);
+            z-index: -1;
+        }
+        .contenedor { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+        h1 { text-align: center; font-size: 2rem; margin-bottom: 30px; color: #ffcc00; text-shadow: 0 0 10px rgba(255,204,0,0.6), 0 2px 4px rgba(0,0,0,0.5); }
+        
+        /* Carretera */
+        .carretera {
+            height: 110px;
+            background: #333;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            background-image: 
+                linear-gradient(transparent 45%, #fff 45%, #fff 55%, transparent 55%),
+                linear-gradient(transparent 45%, #fff 45%, #fff 55%, transparent 55%);
+            background-size: 12px 40px;
+            background-position: 0 0, 60px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+        .suelo {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 25px;
+            background: #444;
+        }
+        .borde-izq, .borde-der {
+            position: absolute;
+            top: 0;
+            width: 6px;
+            height: 100%;
+            background: #ffcc00;
+        }
+        .borde-izq { left: 0; }
+        .borde-der { right: 0; }
+    /* ✅ AUTO MÁS GRANDE */
+        .auto {
+            position: absolute;
+            bottom: 15px;
+            left: -150px;
+            width: 140px; /* Antes 100px — ahora más grande */
+            height: auto;
+            animation: conducir 5s linear infinite;
+            filter: drop-shadow(3px 5px 4px rgba(0,0,0,0.4));
+        }
+        @keyframes conducir {
+            0% { left: -150px; }
+            100% { left: 110%; }
+        }
+
+        /* Galería */
+        h2 { font-size: 1.4rem; margin: 30px 0 20px; color: #fff; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .galeria {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+        
+        /* ✅ FOTOS MÁS GRANDES */
+        .foto {
+            width: 260px;       /* Antes 180px */
+            height: 190px;      /* Antes 130px */
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            position: relative;
+            border: 3px solid #ffcc00;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .foto:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 25px rgba(255,204,0,0.5);
+        }
+        
+        .foto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .foto:hover img {
+            transform: scale(1.12);
+        }
+        
+        .etiqueta-texto {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.75);
+            color: #ffcc00;
+            font-size: 0.95rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px 8px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .foto:hover .etiqueta-texto {
+            transform: translateY(0);
+        }
+
+        .volver {
+            display: block;
+            margin: 30px auto 0;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ffcc00, #ff9900);
+            border: none;
+            color: #111;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-decoration: none;
+            width: fit-content;
+        }
+        .volver:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(255,153,0,0.5); }
+
+        /* Para móvil se ven bien */
+        @media(max-width: 600px) {
+            .foto {
+                width: 90%;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h1>🏁🥰 A NUESTRA VELOCIDAD 🏁🥰</h1>
+
+        <div class="carretera">
+            <div class="borde-izq"></div>
+            <div class="borde-der"></div>
+            <img src="../public/auto-Photoroom.png" class="auto" alt="Mi Hot Wheels">
+            <div class="suelo"></div>
+        </div>
+
+        <h2>📸 Galería de fotos</h2>
+        <div class="galeria">
+            <div class="foto" onclick="mostrarTexto(this)">
+                <img src="../public/foto1.jpg" alt="😍😍 TÚ Y YO 😍😍">
+                <span class="etiqueta-texto">😍😍 TÚ Y YO 😍😍</span>
+            </div>
+            <div class="foto" onclick="mostrarTexto(this)">
+                <img src="../public/foto2.jpg" alt="😘😘 SIEMPRE JUNTOS 😘😘">
+                <span class="etiqueta-texto">😘😘 SIEMPRE JUNTOS 😘😘</span>
+            </div>
+            <div class="foto" onclick="mostrarTexto(this)">
+                <img src="../public/foto3.jpg" alt="🥰🥰 NUESTROS BESOS 🥰🥰">
+                <span class="etiqueta-texto">🥰🥰 NUESTROS BESOS 🥰🥰</span>
+            </div>
+            <div class="foto" onclick="mostrarTexto(this)">
+                <img src="../public/foto4.jpg" alt="🤞🤞 SU AROMA 🤞">
+                <span class="etiqueta-texto">🤞🤞 SU AROMA 🤞</span>
+            </div>
+        </div>
+
+        <a href="../index.html" class="volver">← Volver al inicio</a>
+    </div>
+
+    <script>
+        function mostrarTexto(elemento) {
+            const texto = elemento.querySelector('img').alt;
+            alert(texto);
+        }
+    </script>
+</body>
+</html>
