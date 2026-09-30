@@ -94,7 +94,7 @@
         }
         h1 {
             font-size: 2.6rem;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
             color: #ffd700;
             text-shadow: 
                 0 0 10px #ffd700,
@@ -179,27 +179,6 @@
         .b3:hover {
             box-shadow: 0 10px 30px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 255, 0, 0.4);
         }
-        .controles-musica {
-            margin-top: 30px;
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-        .btn-musica {
-            padding: 12px 25px;
-            font-size: 1rem;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            transition: all 0.3s ease;
-        }
-        .btn-musica:hover {
-            background: rgba(255,255,255,0.4);
-            transform: scale(1.05);
-        }
         @media(max-width: 400px) {
             h1 { font-size: 1.6rem; }
             .boton { width: 280px; font-size: 1.1rem; padding: 18px 30px; }
@@ -220,44 +199,15 @@
         <a href="seccion1/pagina1.html" class="boton b1">🏁🔥 A NUESTRA VELOCIDAD 🔥🏁</a>
         <a href="seccion2/pagina2.html" class="boton b2">💙⚡ CARTA PARA TI ⚡💙</a>
         <a href="seccion3/pagina3.html" class="boton b3">🌟🌹 ALGO ESPECIAL 🌹🌟</a>
-        
-        <!-- 🎵 Controles de música visibles -->
-       
+    </div>
+
+    <!-- 🎵 MÚSICA GLOBAL - SIN BOTONES, CONTINUA SIN CORTARSE -->
+    <audio id="musicaGlobal" loop preload="auto">
+        <source src="audio.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio.
     
 
-    <!-- 🎵 MÚSICA - Etiquetas correctas y cerradas -->
-    
-        <!-- 🎵 Música que NO se corta -->
-<audio id="musicaGlobal" loop preload="auto">
-    <source src="../audio.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio.
-
-
-<script>
-const audio = document.getElementById('musicaGlobal');
-audio.volume = 0.7;
-
-// Recuperar estado de reproducción desde la página anterior
-const estado = sessionStorage.getItem('musicaActiva');
-
-if (estado === 'si') {
-    // Ya estaba sonando → continuar desde donde iba
-    const tiempo = parseFloat(sessionStorage.getItem('tiempoMusica') || 0);
-    audio.currentTime = tiempo;
-    audio.play().catch(() => {});
-}
-
-// Guardar estado antes de salir
-window.addEventListener('beforeunload', () => {
-    if (!audio.paused) {
-        sessionStorage.setItem('musicaActiva', 'si');
-        sessionStorage.setItem('tiempoMusica', audio.currentTime);
-    }
-});
-
-    
-
-    
+    <script>
         // Partículas
         const contenedorEnergia = document.getElementById('energia');
         const simbolosEnergia = ['⚡', '✦', '✧', '⚛', '✦', '⚡'];
@@ -285,8 +235,33 @@ window.addEventListener('beforeunload', () => {
             contenedorRepulsores.appendChild(rep);
         }
 
-        // 🎵 MÚSICA - Código corregido
-       
+        // 🎵 LÓGICA DE MÚSICA - CONTINUA ENTRE PÁGINAS
+        const audio = document.getElementById('musicaGlobal');
+        audio.volume = 0.7;
+
+        // Recuperar si ya estaba sonando
+        const estado = sessionStorage.getItem('musicaActiva');
+        if (estado === 'si') {
+            const tiempo = parseFloat(sessionStorage.getItem('tiempoMusica') || 0);
+            audio.currentTime = tiempo;
+            audio.play().catch(() => {});
+        }
+
+        // Guardar progreso antes de salir
+        window.addEventListener('beforeunload', () => {
+            if (!audio.paused) {
+                sessionStorage.setItem('musicaActiva', 'si');
+                sessionStorage.setItem('tiempoMusica', audio.currentTime);
+            }
+        });
+
+        // Iniciar con un clic (los navegadores lo requieren)
+        document.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                sessionStorage.setItem('musicaActiva', 'si');
+            }
+        }, { once: true });
     </script>
 </body>
 </html>
