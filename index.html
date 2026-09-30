@@ -9,7 +9,6 @@
         
         body {
             min-height: 100vh;
-            /* Fondo temático Iron Man: noche, metal, fuego y brillo */
             background: linear-gradient(180deg, 
                 #0a0a0a 0%, 
                 #1a1a1a 25%, 
@@ -25,7 +24,6 @@
             position: relative;
             overflow: hidden;
         }
-        /* --- Partículas de energía (reemplazo estrellas) --- */
         .energia {
             position: absolute;
             top: 0;
@@ -44,7 +42,6 @@
             0%,100% { opacity: 0.2; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.4); }
         }
-        /* --- Repulsores en movimiento --- */
         .repulsores {
             position: absolute;
             top: 0;
@@ -64,7 +61,6 @@
             0% { transform: translateX(-150px) translateY(0); }
             100% { transform: translateX(calc(100vw + 150px)) translateY(0); }
         }
-        /* --- Núcleo del reactor --- */
         .reactor {
             position: absolute;
             bottom: 5%;
@@ -86,7 +82,6 @@
                 filter: drop-shadow(0 0 60px #00bfff) drop-shadow(0 0 90px #00ffff);
             }
         }
-        /* --- Líneas de armadura --- */
         .lineas-armadura {
             position: absolute;
             bottom: 0;
@@ -97,10 +92,9 @@
             border-top: 2px solid rgba(255, 215, 0, 0.3);
             z-index: 2;
         }
-        /* --- Título --- */
         h1 {
             font-size: 2.6rem;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             color: #ffd700;
             text-shadow: 
                 0 0 10px #ffd700,
@@ -116,7 +110,6 @@
             from { opacity: 0; transform: translateY(-30px) scale(0.9); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
-        /* --- Menú de botones --- */
         .menu {
             display: flex;
             flex-direction: column;
@@ -129,7 +122,6 @@
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* --- Botones con estilo Iron Man --- */
         .boton {
             padding: 22px 45px;
             font-size: 1.3rem;
@@ -162,7 +154,6 @@
         .boton:hover {
             transform: scale(1.05) translateY(-4px);
         }
-        /* Botón 1: Rojo Dorado - Armadura Clásica */
         .b1 {
             background: linear-gradient(135deg, #b22222, #ff4500, #ffd700);
             box-shadow: 0 6px 20px rgba(255, 69, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
@@ -171,16 +162,14 @@
         .b1:hover {
             box-shadow: 0 10px 30px rgba(255, 69, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.4);
         }
-        /* Botón 2: Azul - Reactor de Energía */
         .b2 {
             background: linear-gradient(135deg, #0066cc, #0099ff, #00ccff);
             box-shadow: 0 6px 20px rgba(0, 153, 255, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
             border-color: #00ffff;
         }
         .b2:hover {
-            box-shadow: 0 10px 30px rgba(0, 153, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 153, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.4);
         }
-        /* Botón 3: Dorado - Oro & Velocidad */
         .b3 {
             background: linear-gradient(135deg, #ffcc00, #ffd700, #ffed4e);
             color: #222;
@@ -190,7 +179,27 @@
         .b3:hover {
             box-shadow: 0 10px 30px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 255, 0, 0.4);
         }
-        /* Responsivo */
+        .controles-musica {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        .btn-musica {
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-musica:hover {
+            background: rgba(255,255,255,0.4);
+            transform: scale(1.05);
+        }
         @media(max-width: 400px) {
             h1 { font-size: 1.6rem; }
             .boton { width: 280px; font-size: 1.1rem; padding: 18px 30px; }
@@ -200,13 +209,9 @@
     </style>
 </head>
 <body>
-    <!-- ⚡ Partículas de energía -->
     <div class="energia" id="energia"></div>
-    <!-- 🚀 Repulsores volando -->
     <div class="repulsores" id="repulsores"></div>
-    <!-- 🔋 Reactor Arc -->
     <div class="reactor">🔋</div>
-    <!-- 🛡️ Líneas de armadura -->
     <div class="lineas-armadura"></div>
     
     <h1>🤖🏎️ ¡Iron Man & Hot Wheels! 🏎️🤖<br>✨ Día Especial ✨</h1>
@@ -215,10 +220,45 @@
         <a href="seccion1/pagina1.html" class="boton b1">🏁🔥 A NUESTRA VELOCIDAD 🔥🏁</a>
         <a href="seccion2/pagina2.html" class="boton b2">💙⚡ CARTA PARA TI ⚡💙</a>
         <a href="seccion3/pagina3.html" class="boton b3">🌟🌹 ALGO ESPECIAL 🌹🌟</a>
-    </div>
+        
+        <!-- 🎵 Controles de música visibles -->
+       
+    
 
-    <script>
-        // Generar partículas de energía
+    <!-- 🎵 MÚSICA - Etiquetas correctas y cerradas -->
+    
+        <!-- 🎵 Música que NO se corta -->
+<audio id="musicaGlobal" loop preload="auto">
+    <source src="../audio.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+
+
+<script>
+const audio = document.getElementById('musicaGlobal');
+audio.volume = 0.7;
+
+// Recuperar estado de reproducción desde la página anterior
+const estado = sessionStorage.getItem('musicaActiva');
+
+if (estado === 'si') {
+    // Ya estaba sonando → continuar desde donde iba
+    const tiempo = parseFloat(sessionStorage.getItem('tiempoMusica') || 0);
+    audio.currentTime = tiempo;
+    audio.play().catch(() => {});
+}
+
+// Guardar estado antes de salir
+window.addEventListener('beforeunload', () => {
+    if (!audio.paused) {
+        sessionStorage.setItem('musicaActiva', 'si');
+        sessionStorage.setItem('tiempoMusica', audio.currentTime);
+    }
+});
+
+    
+
+    
+        // Partículas
         const contenedorEnergia = document.getElementById('energia');
         const simbolosEnergia = ['⚡', '✦', '✧', '⚛', '✦', '⚡'];
         for (let i = 0; i < 35; i++) {
@@ -232,9 +272,9 @@
             contenedorEnergia.appendChild(part);
         }
 
-        // Generar repulsores en movimiento
+        // Repulsores
         const contenedorRepulsores = document.getElementById('repulsores');
-        const iconos = ['🚀', '🔥', '⚡', '🛡️', '💫', '🔧', '✨', '🏎️'];
+        const iconos = ['😍', '🔥', '⚡', '🛡️', '💫', '🔧', '✨', '🏎️'];
         for (let i = 0; i < 6; i++) {
             const rep = document.createElement('span');
             rep.className = 'repulsor';
@@ -244,6 +284,9 @@
             rep.style.animationDelay = `${-Math.random() * 25}s`;
             contenedorRepulsores.appendChild(rep);
         }
+
+        // 🎵 MÚSICA - Código corregido
+       
     </script>
 </body>
 </html>

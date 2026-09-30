@@ -214,5 +214,41 @@
 
         <a href="../index.html" class="volver">← Volver al inicio</a>
     </div>
+    <!-- 🎵 Música que NO se corta -->
+<audio id="musicaGlobal" loop preload="auto">
+    <source src="../audio.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+
+
+<script>
+const audio = document.getElementById('musicaGlobal');
+audio.volume = 0.7;
+
+// Recuperar estado de reproducción desde la página anterior
+const estado = sessionStorage.getItem('musicaActiva');
+
+if (estado === 'si') {
+    // Ya estaba sonando → continuar desde donde iba
+    const tiempo = parseFloat(sessionStorage.getItem('tiempoMusica') || 0);
+    audio.currentTime = tiempo;
+    audio.play().catch(() => {});
+}
+
+// Guardar estado antes de salir
+window.addEventListener('beforeunload', () => {
+    if (!audio.paused) {
+        sessionStorage.setItem('musicaActiva', 'si');
+        sessionStorage.setItem('tiempoMusica', audio.currentTime);
+    }
+});
+
+// Botón manual por si acaso
+document.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        sessionStorage.setItem('musicaActiva', 'si');
+    }
+}, { once: true });
+</script>
 </body>
 </html>
