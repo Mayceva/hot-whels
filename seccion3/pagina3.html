@@ -240,9 +240,40 @@
             contenedor.appendChild(estrella);
         }
     </script>
+    
+
+    <script>
+        // Partículas
+        const contenedorEnergia = document.getElementById('energia');
+        const simbolosEnergia = ['⚡', '✦', '✧', '⚛', '✦', '⚡'];
+        for (let i = 0; i < 35; i++) {
+            const part = document.createElement('span');
+            part.className = 'particula';
+            part.textContent = simbolosEnergia[Math.floor(Math.random() * simbolosEnergia.length)];
+            part.style.left = `${Math.random() * 100}%`;
+            part.style.top = `${Math.random() * 60}%`;
+            part.style.animationDelay = `${Math.random() * 2.5}s`;
+            part.style.fontSize = `${10 + Math.random() * 10}px`;
+            contenedorEnergia.appendChild(part);
+        }
+
+        // Repulsores
+        const contenedorRepulsores = document.getElementById('repulsores');
+        const iconos = ['😍', '🔥', '⚡', '🛡️', '💫', '🔧', '✨', '🏎️'];
+        for (let i = 0; i < 6; i++) {
+            const rep = document.createElement('span');
+            rep.className = 'repulsor';
+            rep.textContent = iconos[Math.floor(Math.random() * iconos.length)];
+            rep.style.top = `${10 + Math.random() * 50}%`;
+            rep.style.animationDuration = `${15 + Math.random() * 25}s`;
+            rep.style.animationDelay = `${-Math.random() * 25}s`;
+            contenedorRepulsores.appendChild(rep);
+        }
+        </script>
+
     <!-- 🎵 Música que NO se corta -->
 <audio id="musicaGlobal" loop preload="auto">
-    <source src="/audio.mp3" type="audio/mpeg">
+    <source src="../audio.mp3" type="audio/mpeg">
     Tu navegador no soporta audio.
 
 
@@ -277,4 +308,5 @@ document.addEventListener('click', () => {
 }, { once: true });
 </script>
 </body>
+
 </html>
